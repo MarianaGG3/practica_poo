@@ -68,17 +68,24 @@ class Sistema:
             if c == p.verCedula():
                 return p
 
+    def verNumeroPacientes(self):
+        #print("Enel sistema hay: " + str(len(self.__lista_pacientes)) + " pacientes")
+    
+        return len(self.__lista_pacientes)
+
 
     def verDatosxNombre (self, n):
         if self.verificarPac(n) == False:
-            return None
-        for p in self.__lista_pacientes:
-            if n == p.verNombre():
-                return p
-    def verNumeroPacientes(self):
-        # print("Enel sistema hay: " + str(len(self.__lista_pacientes)) + " pacientes")
-    
-        return len(self.__lista_pacientes)
+            print ("el paciente no se encontró")
+        else:
+
+            for p in self.__lista_pacientes:
+                if n == p.verNombre():
+                    print("Nombre: " + p.verNombre())
+                    print("Cedula: " + str(p.verCedula()))
+                    print("Genero: " + p.verGenero())
+                    print("Servicio: " + p.verServicio())
+
 #funcion inicializadora del sistema        
 def main():
     sis = Sistema()
@@ -115,25 +122,12 @@ def main():
 
         elif opcion == 2:
             while True:
-                menu=(int(input("""ingrese:
-                1. para buscar por nombre
-                2. para buscar por cedula :  """)))
-
+                menu=int(input("""
+                1. buscar paciente por cedula
+                2. buscar paciente por nombre:
+                """))
                 if menu==1:
-                    n=(input("ingrese el nombre a buscar: "))
-                    p = sis.verDatosxNombre(n)
-                    if p == None:
-                        print("El paciente no se encontró")
-                    else:
-                        print("Nombre: " + p.verNombre())
-                        print("Cedula: " + str(p.verCedula()))
-                        print("Genero: " + p.verGenero())
-                        print("Servicio: " + p.verServicio())
-                        break
-
-                if menu==2:
-
-                    # 1 solicito la cedula que quiero buscar
+                    # solicito la cedula que quiero buscar
                     c = int(input("Ingrese la cedula a buscar: "))
                     # le pido al sistema que me devuelva en la variable p al paciente que tenga
                     #  la cedula c en la lista
@@ -146,8 +140,18 @@ def main():
                         print("Cedula: " + str(p.verCedula()))
                         print("Genero: " + p.verGenero())
                         print("Servicio: " + p.verServicio())
-                        break
-        
+
+                    break
+                elif menu==2:
+                    # solicito la cedula que quiero buscar
+                    c = str(input("Ingrese el nombre a buscar: "))
+                    # le pido al sistema que me devuelva en la variable p al paciente que tenga
+                    #  la cedula c en la lista
+                    b = sis.verDatosxNombre(c)
+                    # si encunetro el paciente imprimo los datos
+                    print (b)
+                    break
+              
         elif opcion == 3:
             print(f"la cantidad de pacientes en el sistema es: {sis.verNumeroPacientes()}")
             
